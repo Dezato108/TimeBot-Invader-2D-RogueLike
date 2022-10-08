@@ -30,7 +30,13 @@ public class PlayerController : MonoBehaviour
         currentMovementSpeed = movementSpeed;
         canDash = true;
 
-        currentGun = 1;
+        for (int i = 0; i < availableWeapons.Count; i++)
+        {
+            if (availableWeapons[i].gameObject.activeInHierarchy)
+            {
+                currentGun = i;
+            }
+        }
         SettingWeaponsUI();
         
     }
@@ -49,26 +55,31 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (availableWeapons.Count > 0)
-            {
-                currentGun++;
-                if (currentGun >= availableWeapons.Count)
-                {
-                    currentGun = 0;
-                }
+            ActualGunSwitch();
+        }
+    }
 
-                foreach (WeaponsSystem weapon in availableWeapons)
-                {
-                    weapon.gameObject.SetActive(false);
-                }
-
-                availableWeapons[currentGun].gameObject.SetActive(true);
-                SettingWeaponsUI();
-            }
-            else
+    private void ActualGunSwitch()
+    {
+        if (availableWeapons.Count > 0)
+        {
+            currentGun++;
+            if (currentGun >= availableWeapons.Count)
             {
-                Debug.LogWarning("No guns available, pick one up");
+                currentGun = 0;
             }
+
+            foreach (WeaponsSystem weapon in availableWeapons)
+            {
+                weapon.gameObject.SetActive(false);
+            }
+
+            availableWeapons[currentGun].gameObject.SetActive(true);
+            SettingWeaponsUI();
+        }
+        else
+        {
+            Debug.LogWarning("No guns available, pick one up");
         }
     }
 
@@ -76,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         UIManager.instance.ChangeWeaponUI(
             availableWeapons[currentGun].GetComponent<WeaponsSystem>().GetWeaponImageUI(),
-            availableWeapons[currentGun].GetComponent<WeaponsSystem>().GetWeaponNameUI()
+            availableWeapons[currentGun].GetComponent<WeaponsSystem>().GetWeaponName()
             );
     }
 
@@ -161,5 +172,15 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void AddToAvailableWeapons(WeaponsSystem weaponToAdd)
+    {
+        availableWeapons.Add(weaponToAdd);
+        currentGun = availableWeapons.Count - 2;
+        ActualGunSwitch();
+    }
+
+    public List<WeaponsSystem> GetAvailableWeaponsOnPlayer(){ return availableWeapons;}
+
+    public Transform GetWeaponsArm() { return weaponsArm; }
     //public bool isPlayerDashing() { return canDash; }
 }

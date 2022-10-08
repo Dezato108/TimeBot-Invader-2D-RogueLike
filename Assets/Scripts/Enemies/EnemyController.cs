@@ -105,6 +105,15 @@ public class EnemyController : MonoBehaviour
         if (enemyHealth <= 0)
         {
             Instantiate(deathSplatter, transform.position, transform.rotation);
+
+            if (GetComponent<ItemDropper>() != null)
+            {
+                if (GetComponent<ItemDropper>().IsItemDropper())
+                {
+                    GetComponent<ItemDropper>().DropItem();
+                }
+            }
+
             Destroy(gameObject);
         }
     }

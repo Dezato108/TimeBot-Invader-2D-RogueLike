@@ -43,6 +43,6 @@ public class WeaponsSystem : MonoBehaviour
     }
 
     public Sprite GetWeaponImageUI() { return weaponImage; }
-    public string GetWeaponNameUI() { return weaponName; }
+    public string GetWeaponName() { return weaponName; }
 
 }

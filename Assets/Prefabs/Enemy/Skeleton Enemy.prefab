@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 1950970381756158202}
   - component: {fileID: 1950970381756158200}
   - component: {fileID: 5586579192509966830}
+  - component: {fileID: 5859875562923890656}
   m_Layer: 8
   m_Name: Skeleton Enemy
   m_TagString: Enemy
@@ -198,6 +199,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.26387906, y: -0.0046292543}
   m_Size: {x: 1.0277581, y: 2.601792}
   m_Direction: 0
+--- !u!114 &5859875562923890656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950970381756158201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec95e2bf8bbd33468f85bb03d2587d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropsItem: 1
+  itemsToDrop:
+  - {fileID: 1942864518152068021, guid: bc4196f702285dd4994e921db64b411d, type: 3}
+  itemDropchange: 1
 --- !u!1 &1950970382186834807
 GameObject:
   m_ObjectHideFlags: 0

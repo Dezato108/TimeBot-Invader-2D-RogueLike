@@ -13,12 +13,21 @@ public class Breakables : MonoBehaviour
             if (PlayerIsDashing)
             {
                 GetComponent<Animator>().SetTrigger("Break");
+
                 for (int i=0;i<brokenParts.Length; i++)
                 {
                     int randomBrokenPart = Random.Range(0, brokenParts.Length);
                     int randomRotation = Random.Range(0, 4);
                     Instantiate(brokenParts[randomBrokenPart], transform.position, Quaternion.Euler(0f, 0f, 90f * randomRotation));
                 }
+                if (GetComponent<ItemDropper>() != null)
+                {
+                    if (GetComponent<ItemDropper>().IsItemDropper())
+                    {
+                        GetComponent<ItemDropper>().DropItem();
+                    }
+                }
+
 
             }
         }
