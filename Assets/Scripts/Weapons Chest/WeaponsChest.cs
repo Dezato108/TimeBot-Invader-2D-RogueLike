@@ -12,23 +12,31 @@ public class WeaponsChest : MonoBehaviour
     [SerializeField] Sprite openChestSprite;
     [SerializeField] TextMeshProUGUI openKeyText;
 
-    private bool canOpen;
+    [SerializeField] Transform spawnPoint;
+    private bool canOpen, hasBeenOpened;
     // Start is called before the first frame update
     void Start()
     {
+        hasBeenOpened = false;
         chestSR = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && canOpen)
+        if (Input.GetKeyDown(KeyCode.E) && canOpen && !hasBeenOpened )
         {
             chestSR.sprite = openChestSprite;
+            hasBeenOpened = true;
+            int randomWeaponNumber = Random.Range(0, potentialWeapons.Length);
+            Instantiate(potentialWeapons[randomWeaponNumber], spawnPoint.position, spawnPoint.rotation);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        openKeyText.gameObject.SetActive(true);
+        if (!hasBeenOpened)
+        {
+            openKeyText.gameObject.SetActive(true);
+        }
         canOpen = true;
     }
 
