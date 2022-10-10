@@ -40,6 +40,6 @@ public class UIManager : MonoBehaviour
 
     public void TurnDeathScreenOn()
     {
-        deathScreen.SetActive(true);
+        deathScreen.SetActive(true);        
     }
 }

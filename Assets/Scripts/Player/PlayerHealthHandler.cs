@@ -41,6 +41,7 @@ public class PlayerHealthHandler : MonoBehaviour
             if (currentHealth <= 0)
             {
                 UIManager.instance.TurnDeathScreenOn();
+                AudioManager.instance.PlayGameOverMusic();
                 gameObject.SetActive(false);
             }
 
