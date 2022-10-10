@@ -8,16 +8,23 @@ public class EnemyController : MonoBehaviour
     [SerializeField] int enemyHealth = 100;
     private Rigidbody2D enemyRigidbody;
 
+    //enemies that chase player
+    [SerializeField] bool shouldChasePlayer;
     [SerializeField] float playerChaseRange;
     [SerializeField] float playerKeepChaseRange;
 
-    public bool isChasing;
+    private bool isChasing;
 
     private Vector3 directionToMoveIn;
-
-    [SerializeField] private Transform playerToChase;
+    [SerializeField] Transform playerToChase;
 
     [SerializeField] GameObject deathSplatter;
+
+    //enemies that run away
+    [SerializeField] bool shouldRunAway;
+    [SerializeField] float runAwayRange;
+
+    //
 
     //Attack
     [SerializeField] bool meleeAttacker;
@@ -42,12 +49,45 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, playerToChase.position) < playerChaseRange)
+        MovingTowardsThePlayer();
+
+        if (directionToMoveIn != Vector3.zero)
+        {
+            enemyAnimator.SetBool("isWalking", true);
+        }
+        else
+        {
+            enemyAnimator.SetBool("isWalking", false);
+        }
+
+        if (playerToChase.position.x < transform.position.x)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else
+        {
+            transform.localScale = Vector3.one;
+        }
+
+        if (!meleeAttacker &&
+            readyToShoot &&
+            Vector3.Distance(playerToChase.transform.position, transform.position) < shootingRange
+            )
+        {
+            readyToShoot = false;
+            StartCoroutine(FireEnemyProjectile());
+        }
+    }
+
+    private void MovingTowardsThePlayer()
+    {
+        float distancePlayerEnemies = Vector3.Distance(transform.position, playerToChase.position);
+        if (distancePlayerEnemies < playerChaseRange && shouldChasePlayer)
         {
             directionToMoveIn = playerToChase.position - transform.position;
             isChasing = true;
         }
-        else if(Vector3.Distance(transform.position, playerToChase.position) < playerKeepChaseRange && isChasing)
+        else if (distancePlayerEnemies < playerKeepChaseRange && isChasing && shouldChasePlayer)
         {
             directionToMoveIn = playerToChase.position - transform.position;
         }
@@ -57,35 +97,13 @@ public class EnemyController : MonoBehaviour
             isChasing = false;
         }
 
+        if (shouldRunAway && distancePlayerEnemies < runAwayRange)
+        {
+            directionToMoveIn = transform.position - playerToChase.position;
+        }
+
         directionToMoveIn.Normalize();
         enemyRigidbody.velocity = directionToMoveIn * enemySpeed;
-
-        if (directionToMoveIn != Vector3.zero)
-        {
-            enemyAnimator.SetBool("isWalking",true);
-        }
-        else
-        {
-            enemyAnimator.SetBool("isWalking",false);
-        }
-
-        if (playerToChase.position.x < transform.position.x)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);            
-        }
-        else
-        {
-            transform.localScale = Vector3.one;            
-        }
-                
-        if (!meleeAttacker &&
-            readyToShoot &&
-            Vector3.Distance(playerToChase.transform.position, transform.position)<shootingRange
-            )
-        {
-            readyToShoot = false;
-            StartCoroutine(FireEnemyProjectile());
-        }
     }
 
     IEnumerator FireEnemyProjectile()
@@ -120,13 +138,21 @@ public class EnemyController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, playerChaseRange);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, playerKeepChaseRange);
-        
+        if (shouldChasePlayer)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, playerChaseRange);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, playerKeepChaseRange);
+        }   
+                
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, shootingRange);
+
+        if (shouldRunAway)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, runAwayRange);
+        }
     }
 }
