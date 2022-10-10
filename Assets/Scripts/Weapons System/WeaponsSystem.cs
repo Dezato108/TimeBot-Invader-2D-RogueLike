@@ -12,6 +12,8 @@ public class WeaponsSystem : MonoBehaviour
 
     [SerializeField] Sprite weaponImage;
     [SerializeField] string weaponName;
+
+    [SerializeField] int sfxNumberToPlay;
     
     // Update is called once per frame
     void Update()
@@ -32,11 +34,16 @@ public class WeaponsSystem : MonoBehaviour
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
             {
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
+                PlayWeaponSFX();
                 shotCounter = timeBetweenShots;
             }
         }
     }
 
+    public void PlayWeaponSFX()
+    {
+        AudioManager.instance.PlaySFX(sfxNumberToPlay);
+    }
     public Sprite GetWeaponImageUI() { return weaponImage; }
     public string GetWeaponName() { return weaponName; }
 

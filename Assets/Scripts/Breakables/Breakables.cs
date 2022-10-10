@@ -5,6 +5,7 @@ using UnityEngine;
 public class Breakables : MonoBehaviour
 {
     [SerializeField] GameObject[] brokenParts;
+    [SerializeField] int sfxNumberToPlay;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -13,6 +14,7 @@ public class Breakables : MonoBehaviour
             if (PlayerIsDashing)
             {
                 GetComponent<Animator>().SetTrigger("Break");
+                //PlayBreakSFX();
 
                 for (int i=0;i<brokenParts.Length; i++)
                 {
@@ -31,6 +33,11 @@ public class Breakables : MonoBehaviour
 
             }
         }
+    }
+
+    public void PlayBreakSFX()
+    {
+        AudioManager.instance.PlaySFX(sfxNumberToPlay);
     }
 
     public void Destroy()

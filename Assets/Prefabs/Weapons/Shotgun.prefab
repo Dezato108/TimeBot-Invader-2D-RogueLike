@@ -131,3 +131,4 @@ MonoBehaviour:
   timeBetweenShots: 1
   weaponImage: {fileID: 21300000, guid: 32d170829b0e0454c8d989e1920aece2, type: 3}
   weaponName: Shotgun
+  sfxNumberToPlay: 9
