@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    
     [SerializeField] float enemySpeed;
     [SerializeField] int enemyHealth = 100;
     private Rigidbody2D enemyRigidbody;
 
     //enemies that chase player
+    [Header("Enemies that chase player")]
     [SerializeField] bool shouldChasePlayer;
     [SerializeField] float playerChaseRange;
     [SerializeField] float playerKeepChaseRange;
@@ -21,10 +23,23 @@ public class EnemyController : MonoBehaviour
     [SerializeField] GameObject deathSplatter;
 
     //enemies that run away
+    [Header("Enemies that run away")]
     [SerializeField] bool shouldRunAway;
     [SerializeField] float runAwayRange;
 
-    //
+    //enemies that wander
+    [Header("Enemies that wander")]
+    [SerializeField] bool shouldWander;
+    [SerializeField] float wanderLength, pauseLength;
+
+    private float wanderCounter, pauseCounter;
+    private Vector3 wanderDirection;
+
+    //enemies that patrol
+    [Header("Enemies that patrol")]
+    [SerializeField] bool shouldPatrol;
+    [SerializeField] Transform[] patrolPoints;
+    private int currentPatrolPoint;
 
     //Attack
     [SerializeField] bool meleeAttacker;
@@ -44,6 +59,11 @@ public class EnemyController : MonoBehaviour
 
         enemyAnimator = GetComponentInChildren<Animator>();
         readyToShoot = true;
+
+        if (shouldWander)
+        {
+            pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
+        }
     }
 
     // Update is called once per frame
@@ -95,6 +115,44 @@ public class EnemyController : MonoBehaviour
         {
             directionToMoveIn = Vector3.zero;
             isChasing = false;
+        }
+
+        if (shouldWander && !isChasing)
+        {
+            if (wanderCounter > 0)
+            {
+                wanderCounter -= Time.deltaTime;
+                directionToMoveIn = wanderDirection;
+                if (wanderCounter <= 0)
+                {
+                    pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
+                }
+            }
+
+            if (pauseCounter>0)
+            {
+                pauseCounter -= Time.deltaTime;
+                if (pauseCounter<=0)
+                {
+                    wanderCounter = Random.Range(wanderLength * 0.75f, wanderLength * 1.25f);
+                    wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                }
+            }
+        }
+
+        if (shouldPatrol && !isChasing)
+        {
+            directionToMoveIn = patrolPoints[currentPatrolPoint].position - transform.position;
+            float distanceEnemiesPoint = Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position);
+
+            if (distanceEnemiesPoint < 0.2f)
+            {
+                currentPatrolPoint++;
+                if (currentPatrolPoint>=patrolPoints.Length)
+                {
+                    currentPatrolPoint = 0;
+                }
+            }      
         }
 
         if (shouldRunAway && distancePlayerEnemies < runAwayRange)

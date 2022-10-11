@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8006473104395700698
 Transform:
   m_ObjectHideFlags: 0
@@ -78,15 +78,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34f38968cfef7b4989f76731e1c5fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 2
+  enemySpeed: 5
   enemyHealth: 30
+  shouldChasePlayer: 0
   playerChaseRange: 3
   playerKeepChaseRange: 5
-  isChasing: 0
   playerToChase: {fileID: 0}
   deathSplatter: {fileID: 5548581773079128218, guid: 7e27db5e1b3a96746ab652d4b1de9bbd, type: 3}
+  shouldRunAway: 1
+  runAwayRange: 5
   meleeAttacker: 0
-  enemyProjectile: {fileID: 8668693253573451321, guid: 641b3e420a745a5469509cc7176e6504, type: 3}
+  enemyProjectile: {fileID: 8364014430713100122, guid: 9fcdb553a0e7f2f468000ace39b1e5d3, type: 3}
   firePosition: {fileID: 8006473103760044649}
   shootingRange: 6
   timeBetweenShots: 1
