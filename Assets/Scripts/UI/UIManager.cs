@@ -24,16 +24,6 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
     public void FadeImage()
     {
         imageToFade.GetComponent<Animator>().SetTrigger("Start Fade");
