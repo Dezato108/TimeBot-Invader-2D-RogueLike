@@ -169,6 +169,7 @@ MonoBehaviour:
   - {fileID: 3595759069525225162, guid: 099f0c0da14dcf04b84ab75f523c40a3, type: 3}
   - {fileID: 956734129360770818, guid: 091e8a3fb6a1e4c469cfd91e04cdd3c6, type: 3}
   - {fileID: 649613820839041111, guid: 86a95fe45f951a64f83912f4c5fc18d3, type: 3}
+  sfxNumberToPlay: 0
 --- !u!114 &5005500244639413837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec95e2bf8bbd33468f85bb03d2587d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropsItem: 0
+  dropsItem: 1
   itemsToDrop:
   - {fileID: 1942864518152068021, guid: bc4196f702285dd4994e921db64b411d, type: 3}
+  - {fileID: 6098750135826753991, guid: 5e4064a37ed1a0c4a948847964fca5cf, type: 3}
+  - {fileID: 6098750135826753991, guid: 5e4064a37ed1a0c4a948847964fca5cf, type: 3}
+  - {fileID: 6098750135826753991, guid: 5e4064a37ed1a0c4a948847964fca5cf, type: 3}
   itemDropchange: 1

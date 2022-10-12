@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject deathScreen;
 
+    [SerializeField] TextMeshProUGUI btcText;
+
     private void Awake()
     {
         instance = this;
@@ -41,5 +43,10 @@ public class UIManager : MonoBehaviour
     public void TurnDeathScreenOn()
     {
         deathScreen.SetActive(true);        
+    }
+
+    public void UpdateBitcoinText(int amountOfBTC)
+    {
+        btcText.text = amountOfBTC.ToString();
     }
 }

@@ -152,13 +152,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 5
   enemyHealth: 30
-  shouldChasePlayer: 0
-  playerChaseRange: 7
-  playerKeepChaseRange: 5
+  shouldChasePlayer: 1
+  playerChaseRange: 9
+  playerKeepChaseRange: 9
   playerToChase: {fileID: 0}
   deathSplatter: {fileID: 5548581773079128218, guid: 7e27db5e1b3a96746ab652d4b1de9bbd, type: 3}
   shouldRunAway: 0
   runAwayRange: 5
+  shouldWander: 1
+  wanderLength: 2
+  pauseLength: 2
+  shouldPatrol: 0
+  patrolPoints: []
   meleeAttacker: 0
   enemyProjectile: {fileID: 9068337814960491485, guid: 73481865b39c2124eae4293324bdb659, type: 3}
   firePosition: {fileID: 6828750891616755844}
@@ -198,8 +203,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.26387906, y: -0.0046292543}
-  m_Size: {x: 1.0277581, y: 2.601792}
+  m_Offset: {x: 0.033688843, y: -0.45105934}
+  m_Size: {x: 1.0975126, y: 1.9879513}
   m_Direction: 0
 --- !u!114 &1478817024547036178
 MonoBehaviour:
@@ -216,6 +221,8 @@ MonoBehaviour:
   dropsItem: 1
   itemsToDrop:
   - {fileID: 1942864518152068021, guid: bc4196f702285dd4994e921db64b411d, type: 3}
+  - {fileID: 6098750135826753991, guid: 5e4064a37ed1a0c4a948847964fca5cf, type: 3}
+  - {fileID: 6098750135826753991, guid: 5e4064a37ed1a0c4a948847964fca5cf, type: 3}
   itemDropchange: 1
 --- !u!1 &6828750891616755845
 GameObject:

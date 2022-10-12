@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    
+    [Header("Base stats")]
     [SerializeField] float enemySpeed;
     [SerializeField] int enemyHealth = 100;
     private Rigidbody2D enemyRigidbody;
@@ -19,7 +19,6 @@ public class EnemyController : MonoBehaviour
 
     private Vector3 directionToMoveIn;
     [SerializeField] Transform playerToChase;
-
     [SerializeField] GameObject deathSplatter;
 
     //enemies that run away
@@ -42,8 +41,8 @@ public class EnemyController : MonoBehaviour
     private int currentPatrolPoint;
 
     //Attack
+    [Header("Enemy attack type")]
     [SerializeField] bool meleeAttacker;
-
     [SerializeField] GameObject enemyProjectile;
     [SerializeField] Transform firePosition;
     [SerializeField] float shootingRange;

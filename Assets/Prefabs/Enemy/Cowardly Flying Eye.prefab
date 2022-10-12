@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8006473104395700698
 Transform:
   m_ObjectHideFlags: 0
@@ -87,6 +87,11 @@ MonoBehaviour:
   deathSplatter: {fileID: 5548581773079128218, guid: 7e27db5e1b3a96746ab652d4b1de9bbd, type: 3}
   shouldRunAway: 1
   runAwayRange: 5
+  shouldWander: 0
+  wanderLength: 0
+  pauseLength: 0
+  shouldPatrol: 0
+  patrolPoints: []
   meleeAttacker: 0
   enemyProjectile: {fileID: 8364014430713100122, guid: 9fcdb553a0e7f2f468000ace39b1e5d3, type: 3}
   firePosition: {fileID: 8006473103760044649}
@@ -126,8 +131,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.26387906, y: -0.0046292543}
-  m_Size: {x: 1.0277581, y: 2.601792}
+  m_Offset: {x: 0.26387906, y: -0.11623287}
+  m_Size: {x: 1.0277581, y: 1.1408119}
   m_Direction: 0
 --- !u!114 &2692585370847661823
 MonoBehaviour:
@@ -144,6 +149,8 @@ MonoBehaviour:
   dropsItem: 1
   itemsToDrop:
   - {fileID: 1942864518152068021, guid: bc4196f702285dd4994e921db64b411d, type: 3}
+  - {fileID: 6098750135826753991, guid: 5e4064a37ed1a0c4a948847964fca5cf, type: 3}
+  - {fileID: 6098750135826753991, guid: 5e4064a37ed1a0c4a948847964fca5cf, type: 3}
   itemDropchange: 1
 --- !u!1 &8006473104540692453
 GameObject:

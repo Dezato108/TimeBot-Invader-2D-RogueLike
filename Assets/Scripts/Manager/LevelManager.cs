@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     [SerializeField] float timeToLoad = 2f;
+
     void Start()
     {
         instance = this;
@@ -26,5 +27,7 @@ public class LevelManager : MonoBehaviour
 
         SceneManager.LoadScene(nextLevel);
     }
+
+    
 
 }
