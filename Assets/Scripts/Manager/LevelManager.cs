@@ -10,9 +10,19 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] float timeToLoad = 2f;
 
+    private bool gameIsPaused;
+
     void Start()
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PauseResumeGame();
+        }
     }
 
     public IEnumerator LoadingNextLevel(string nextLevel)
@@ -26,6 +36,34 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1f;
 
         SceneManager.LoadScene(nextLevel);
+    }
+
+    public void RestarLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(0);        
+    }
+    public bool IsGamePaused() { return gameIsPaused; }
+
+    public void PauseResumeGame()
+    {
+        if (!gameIsPaused)
+        {
+            UIManager.instance.TurnPauseMenuOnOff(true);
+            gameIsPaused = true;
+
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            UIManager.instance.TurnPauseMenuOnOff(false);
+            gameIsPaused = false;
+            Time.timeScale = 1f;
+        }
     }
 
     

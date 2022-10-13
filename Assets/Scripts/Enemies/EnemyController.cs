@@ -68,6 +68,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.instance.IsGamePaused())
+        {
+            return;
+        }
         MovingTowardsThePlayer();
 
         if (directionToMoveIn != Vector3.zero)
