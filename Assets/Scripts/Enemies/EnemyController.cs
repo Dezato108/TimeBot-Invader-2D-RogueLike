@@ -83,6 +83,7 @@ public class EnemyController : MonoBehaviour
             enemyAnimator.SetBool("isWalking", false);
         }
 
+        //flip enemy sprite to player direction
         if (playerToChase.position.x < transform.position.x)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
