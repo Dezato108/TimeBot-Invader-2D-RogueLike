@@ -9,6 +9,10 @@ public class Boss_Walk : StateMachineBehaviour
     Vector3 directionToMoveIn;
     [SerializeField] float speed = 2.5f;
     [SerializeField] float attackRange;
+
+    private float shotCounter;
+    [SerializeField] float shootTime;
+
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -29,12 +33,20 @@ public class Boss_Walk : StateMachineBehaviour
         {
             animator.SetTrigger("Attack");
         }
+
+        shotCounter -= Time.fixedDeltaTime;
+        if (shotCounter <= 0)
+        {
+            animator.SetTrigger("Shoot");
+        }
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Shoot");
+        shotCounter = shootTime;
     }
 
 
