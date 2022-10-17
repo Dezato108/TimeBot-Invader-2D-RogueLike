@@ -8,7 +8,7 @@ public class Boss_Walk : StateMachineBehaviour
     Rigidbody2D bossRigidBody;
     Vector3 directionToMoveIn;
     [SerializeField] float speed = 2.5f;
-    [SerializeField] float attackRange = 3f;
+    [SerializeField] float attackRange;
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

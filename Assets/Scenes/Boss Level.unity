@@ -275,6 +275,36 @@ PolygonCollider2D:
       - {x: -23.174667, y: -26.478334}
       - {x: 39.785355, y: -25.983562}
       - {x: 47.97721, y: 7.0988894}
+--- !u!1 &352137551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352137552}
+  m_Layer: 0
+  m_Name: Point of attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &352137552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352137551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.93, y: -0.57, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1907441002}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &371486885
 GameObject:
   m_ObjectHideFlags: 0
@@ -94749,9 +94779,10 @@ GameObject:
   - component: {fileID: 1907440999}
   - component: {fileID: 1907440998}
   - component: {fileID: 1907441003}
+  - component: {fileID: 1907441004}
   m_Layer: 0
   m_Name: Skelly Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94883,7 +94914,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20.84, y: -0.94, z: -6.0024905}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 352137552}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94899,6 +94931,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434c5bc1048d779409b0e4d37c381c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 20
+  pointOfAttack: {fileID: 352137552}
+  attackRadius: 3
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64
+  angryDamageAmount: 40
+  angryAttackRadius: 6
+--- !u!114 &1907441004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907440997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8530e9070b84446a218c51d8c4c954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossMaxHealth: 40
+  bossCurrentHealth: 0
 --- !u!1 &1942543755
 GameObject:
   m_ObjectHideFlags: 0
@@ -95069,7 +95123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235049360032622550, guid: 39187431c2962c9499e1cc488486afa3, type: 3}
       propertyPath: maxHealth
-      value: 50
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235049360032622550, guid: 39187431c2962c9499e1cc488486afa3, type: 3}
+      propertyPath: invicibilityTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5653811003894933780, guid: 39187431c2962c9499e1cc488486afa3, type: 3}
       propertyPath: m_IsActive
@@ -95181,6 +95239,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 144803092126239369, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 144803092126239369, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 144803092126239369, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -37.167
+      objectReference: {fileID: 0}
+    - target: {fileID: 144803092126239369, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.788025
+      objectReference: {fileID: 0}
     - target: {fileID: 2255994790597511701, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -95273,8 +95347,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4545347261851553897, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 549063cd8362aca488b9eec2fdf2df2d, type: 3}
+    - target: {fileID: 7047570465942783795, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.131012
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867400831138825251, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_Name
+      value: Boss Health Slider
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131040662135085848, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+--- !u!114 &4355841847881531054 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2176949635668647505, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+  m_PrefabInstance: {fileID: 4355841847881531053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4355841847881531055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7689929797632935835, guid: 604aafb80a2c0254d978f62b1b37e11d, type: 3}
+  m_PrefabInstance: {fileID: 4355841847881531053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4355841847881531056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355841847881531055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebba2730c2c3349409d70392fe318723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHealthSlider: {fileID: 4355841847881531054}
 --- !u!1 &4841651510359962132
 GameObject:
   m_ObjectHideFlags: 0

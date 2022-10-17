@@ -5,7 +5,17 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     private Transform playerToChase;
-    public bool isFlipped = false;
+    private bool isFlipped = false;
+
+    [SerializeField] int damageAmount = 20;
+    [SerializeField] Transform pointOfAttack;
+
+    [SerializeField] float attackRadius;
+    [SerializeField] LayerMask whatIsPlayer;
+
+    [SerializeField] int angryDamageAmount = 40;
+    [SerializeField] float angryAttackRadius;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,5 +36,31 @@ public class BossController : MonoBehaviour
             isFlipped = true;
         }
     }
-    
+
+    public void AttackPlayer()
+    {
+        Collider2D playerToAttack = Physics2D.OverlapCircle(pointOfAttack.position, attackRadius, whatIsPlayer);
+        
+        if (playerToAttack != null)
+        {
+            playerToAttack.GetComponent<PlayerHealthHandler>().DamagePlayer(damageAmount);
+        }
+    }
+
+    public void AngryAttackPlayer()
+    {
+        Collider2D playerToAttack = Physics2D.OverlapCircle(pointOfAttack.position, angryAttackRadius, whatIsPlayer);
+       
+        if (playerToAttack != null)
+        {
+            playerToAttack.GetComponent<PlayerHealthHandler>().DamagePlayer(angryDamageAmount);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(pointOfAttack.position, attackRadius);
+    }
+
 }

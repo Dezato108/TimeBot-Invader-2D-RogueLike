@@ -27,9 +27,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             SpendBitCoins(10);
-        }
-
-        Debug.Log("I have" + currentBitCoins + "bitcoins");
+        }        
     }
 
     public void GetBitCoins(int amountToGet)
