@@ -21,9 +21,23 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject pauseMenu;
 
+    [SerializeField] GameObject bossMenu;
+
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        if (FindObjectOfType<BossController>() != null)
+        {
+            bossMenu.SetActive(true);
+        }
+        else
+        {
+            bossMenu.SetActive(false);
+        }
     }
 
     public void FadeImage()

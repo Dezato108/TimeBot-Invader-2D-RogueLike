@@ -575,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   attackRange: 4
-  shootTime: 3
+  shootTime: 10
 --- !u!114 &7958415183151428552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   attackRange: 3
-  shootTime: 2
+  shootTime: 20
 --- !u!1102 &8196557644987036326
 AnimatorState:
   serializedVersion: 6

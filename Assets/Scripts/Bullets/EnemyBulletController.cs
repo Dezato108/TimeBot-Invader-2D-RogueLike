@@ -11,9 +11,7 @@ public class EnemyBulletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerDirection = FindObjectOfType<PlayerController>().transform.position - transform.position;
-        //Debug.Log("Player position: " + FindObjectOfType<PlayerController>().transform.position);
-        //Debug.Log("Enemy position: "+transform.position);
+        playerDirection = FindObjectOfType<PlayerController>().transform.position - transform.position;        
         playerDirection.Normalize();
     }
 
