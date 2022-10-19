@@ -30,13 +30,13 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        if (enemies.Count == 0)
-        {
-            foreach(GameObject door in doorsToClose)
-            {
-                door.SetActive(false);
-            }
-        }
+        //if (enemies.Count == 0)
+        //{
+        //    foreach(GameObject door in doorsToClose)
+        //    {
+        //        door.SetActive(false);
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

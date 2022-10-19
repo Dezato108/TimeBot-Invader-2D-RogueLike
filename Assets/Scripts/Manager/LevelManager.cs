@@ -12,6 +12,10 @@ public class LevelManager : MonoBehaviour
 
     private bool gameIsPaused;
 
+    public int levelToGoTo_1, levelToGoTo_2;
+    public LevelExit levelExit_1, levelExit_2;
+    
+
     void Start()
     {
         instance = this;
@@ -25,7 +29,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public IEnumerator LoadingNextLevel(string nextLevel)
+    public IEnumerator LoadingNextLevel(int nextLevel)
     {
         Time.timeScale = 0.5f;
 
@@ -36,6 +40,28 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1f;
 
         SceneManager.LoadScene(nextLevel);
+    }
+
+    public void LevelPicker()
+    {
+        levelToGoTo_1 = SceneManager.GetActiveScene().buildIndex;
+        levelToGoTo_2 = SceneManager.GetActiveScene().buildIndex;
+
+        while (levelToGoTo_1 == SceneManager.GetActiveScene().buildIndex)
+        {
+            int rand = Random.Range(1, SceneManager.sceneCountInBuildSettings-1);
+            levelToGoTo_1 = rand;
+        }
+
+        levelExit_1.PrintRoomName(levelToGoTo_1);
+        
+        while (levelToGoTo_2 == SceneManager.GetActiveScene().buildIndex || levelToGoTo_2 == levelToGoTo_1)
+        {
+            int rand = Random.Range(1, SceneManager.sceneCountInBuildSettings-1);
+            levelToGoTo_2 = rand;
+        }
+
+        levelExit_2.PrintRoomName(levelToGoTo_2);
     }
 
     public void RestarLevel()

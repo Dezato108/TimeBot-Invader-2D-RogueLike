@@ -16,6 +16,7 @@ public class WaveSpawnerManager : MonoBehaviour
     private float timeBetweenEnemySearch = 1f;
 
     [SerializeField] Transform[] spawnPoints;
+    private bool wavesComplete = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +31,7 @@ public class WaveSpawnerManager : MonoBehaviour
         if (state==SpawningStates.Waiting)
         {
             if (!EnemiesAreAlive())
-            {
-                Debug.Log("Wave Complete");
+            {                
                 StartNewWave();
             }
             else
@@ -39,16 +39,19 @@ public class WaveSpawnerManager : MonoBehaviour
                 return;
             }
         }
-        if (waveCountdown <= 0)
+        if (!wavesComplete)
         {
-            if (state != SpawningStates.Spawning)
+            if (waveCountdown <= 0)
             {
-                StartCoroutine(SpawnWave(waves[nextWave]));
+                if (state != SpawningStates.Spawning)
+                {
+                    StartCoroutine(SpawnWave(waves[nextWave]));
+                }
             }
-        }
-        else
-        {
-            waveCountdown -= Time.deltaTime;
+            else
+            {
+                waveCountdown -= Time.deltaTime;
+            }
         }
     }
 
@@ -96,8 +99,10 @@ public class WaveSpawnerManager : MonoBehaviour
 
         if (nextWave + 1 == waves.Length)
         {
-            Debug.Log("Completed the wave");
+            
+            wavesComplete = true;
             //open the doors, get rewards, ...
+            LevelManager.instance.LevelPicker();
         }
         else
         {
