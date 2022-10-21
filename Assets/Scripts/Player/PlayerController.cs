@@ -22,6 +22,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] List<WeaponsSystem> availableWeapons = new List<WeaponsSystem>();
     private int currentGun;
 
+    public static PlayerController instance;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,6 +152,11 @@ public class PlayerController : MonoBehaviour
 
     private void PointingGunAtMouse()
     {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenPoint = mainCamera.WorldToScreenPoint(transform.localPosition);
 
